@@ -1,6 +1,7 @@
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 const fetchApi = (route, data, method = "POST") => {
+  
   const url = `${BASE_URL}/${route}`;
 
   const headers = {
@@ -36,7 +37,6 @@ export const logout = (section_token) => {
 };
 
 export const register = (Email, Password, Name) => {
- 
   return fetchApi("register", { Email:Email, Password:Password, Name:Name});
 };
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../Navbar'
-import { username } from '../../utils/authoService'
-import { imaglist, imageurl,removeimage } from '../../utils/imageservices'
+import { username } from '../../Services/authoService'
+import { imaglist, imageurl,removeimage } from '../../Services/imageservices'
 import { useNavigate } from 'react-router-dom'
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,6 +40,8 @@ function Profile() {
     }, [refresh])
 
     const handleRemove=(id)=>{
+       const ask = window.confirm("Are you sure you want to delete this image?")
+       if(ask){
         removeimage(token,id).then((res)=>{
             if(res.status===200){
                 successNotify("Image Deleted")
@@ -48,6 +50,7 @@ function Profile() {
             else{
                 errorNotify("Image Not Deleted" )   }
         })
+       }
     }
    
 

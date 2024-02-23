@@ -1,17 +1,17 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Link, useNavigate  } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { register } from '../../utils/authoService'
+import { register } from '../../Services/authoService'
 
 function Register() {
-    const [name, setname] = React.useState('')
-    const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState('')
-    const [cpassword, setCpassword] = React.useState('')
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [cpassword, setCpassword] = useState('')
     const successNotify = () => toast.success("Registration Success");
     const errorNotify = () => toast.error("Registration Failed");
-    const [warning, setWarning] = React.useState({ email: "", password: "" })
+    const [warning, setWarning] = useState({ email: "", password: "" })
     const nevigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -69,7 +69,7 @@ function Register() {
                         <input type="text" class="form-control" id="name" placeholder="Enter Name"
                             name="name"
                             value={name}
-                            onChange={(e) => setname(e.target.value)}
+                            onChange={(e) => setName(e.target.value)}
                         />
                     </div>
 

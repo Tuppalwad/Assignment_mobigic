@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {logout} from '../utils/authoService'
+import { logout } from '../Services/authoService'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function Navbar() {
@@ -8,29 +8,32 @@ function Navbar() {
   const errorNotify = (msg) => toast.error(msg);
 
   const nevigate = useNavigate();
-  const handleLogout=()=>{
-    const token= localStorage.getItem('section_token')
-    logout(token).then((res)=>{
+  const handleLogout = () => {
+
+    const ask = window.confirm("Are you sure you want to logout?")
+
+    if (ask) {
+      const token = localStorage.getItem('section_token')
+    logout(token).then((res) => {
       console.log(res)
-      if(res.status===200){
+      if (res.status === 200) {
         successNotify()
         localStorage.removeItem('section_token')
-        setTimeout(() => {
         nevigate('/')
       }
-      , 1000);
-      }
-      else if(res.status===400){
-          errorNotify(res.error);
+      else if (res.status === 400) {
+        errorNotify(res.error);
         return
       }
 
     })
   }
+    
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <ToastContainer />
+      <ToastContainer />
 
       <div className="container-fluid">
         <Link className="navbar-brand" to="/home">
@@ -40,22 +43,24 @@ function Navbar() {
         </Link>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          
+
           <div className="d-flex ms-auto">
             <Link className="nav-link" to="/home">
               <i className="fa fa-home" style={
-                {fontSize:'20px',
-                color:'black'
-              }
+                {
+                  fontSize: '20px',
+                  color: 'black'
+                }
 
               }></i>
             </Link>
 
-          <Link className="nav-link" to="/profile">
+            <Link className="nav-link" to="/profile">
               <i className="fa fa-user" style={
-                {fontSize:'20px',
-                color:'black'
-              }
+                {
+                  fontSize: '20px',
+                  color: 'black'
+                }
 
               }></i>
             </Link>

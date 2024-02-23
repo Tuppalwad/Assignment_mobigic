@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { handleUpload ,addimage} from '../../utils/imageservices'
+import { handleUpload ,addimage} from '../../Services/imageservices'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function UploadImage() {

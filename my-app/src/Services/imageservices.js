@@ -56,7 +56,7 @@ export const imaglist = (section_token) => {
 
 export const imageurl = async(id) => {
   try {
-    const response = await storage.getFilePreview("65bc8d61c55ee98c97d2", id);
+    const response = await storage.getFilePreview(STORAGE_ID, id);
     return response
 } catch (error) {
     console.error(error);

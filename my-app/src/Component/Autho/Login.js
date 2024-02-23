@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import {login} from '../../utils/authoService'
+import {login} from '../../Services/authoService'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function Login() {
@@ -16,20 +16,20 @@ function Login() {
     }, [])
 
 
-    const [uname, setUname] = React.useState('')
-    const [psw, setPsw] = React.useState('')
+    const [username, setusername] = useState('')
+    const [Password, setPassword] = useState('')
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (uname === "") {
-            setWarning({ uname: "Please Enter Username" })
+        if (username === "") {
+            setWarning({ username: "Please Enter Username" })
             return
         }
-        if (psw === "") {
-            setWarning({ psw: "Please Enter Password" })
+        if (Password === "") {
+            setWarning({ Password: "Please Enter Password" })
             return
         }
         else {
-            login(uname, psw).then((res) => {
+            login(username, Password).then((res) => {
                 if (res.status===200) {
                     localStorage.setItem("section_token",res.section.section_token)
                     successNotify()
@@ -51,27 +51,26 @@ function Login() {
         }
 
     }
-    // validation uesrnam and password
-    const [warning, setWarning] = React.useState({ uname: "", psw: "" })
+    const [warning, setWarning] = useState({ username: "", Password: "" })
 
-    const handleUname = (e) => {
-        setUname(e.target.value)
+    const handleusername = (e) => {
+        setusername(e.target.value)
         if (e.target.value === "") {
-            setWarning({ uname: "Please Enter Username" })
+            setWarning({ username: "Please Enter Username" })
             return
         }
         else {
-            setWarning({ uname: "" })
+            setWarning({ username: "" })
         }
     }
-    const handlePsw = (e) => {
-        setPsw(e.target.value)
+    const handlePassword = (e) => {
+        setPassword(e.target.value)
         if (e.target.value === "") {
-            setWarning({ psw: "Please Enter Password" })
+            setWarning({ Password: "Please Enter Password" })
             return
         }
         else {
-            setWarning({ psw: "" })
+            setWarning({ Password: "" })
         }
     }
 
@@ -85,22 +84,22 @@ function Login() {
                 <h2 class="text-center text-success">Login Form</h2>
                 <form method="post" class="w-25 mx-auto">
                     <div class="mb-3">
-                        <label for="uname" class="form-label"><b>Username</b></label>
-                        <input type="email" class="form-control" id="uname" placeholder="Enter Username" name="uname" required
-                            value={uname}
-                            onChange={handleUname}
+                        <label for="username" class="form-label"><b>Username</b></label>
+                        <input type="email" class="form-control" id="username" placeholder="Enter Username" name="username" required
+                            value={username}
+                            onChange={handleusername}
 
                         />
                     </div>
-                    <p class="text-danger">{warning.uname}</p>
+                    <p class="text-danger">{warning.username}</p>
                     <div class="mb-3">
-                        <label for="psw" class="form-label"><b>Password</b></label>
-                        <input type="password" class="form-control" id="psw" placeholder="Enter Password" name="psw"
-                            value={psw}
-                            onChange={handlePsw}
+                        <label for="Password" class="form-label"><b>Password</b></label>
+                        <input type="password" class="form-control" id="Password" placeholder="Enter Password" name="Password"
+                            value={Password}
+                            onChange={handlePassword}
                             required />
                     </div>
-                    <p class="text-danger">{warning.psw}</p>
+                    <p class="text-danger">{warning.Password}</p>
                     <button type="submit"
                         onClick={handleSubmit}
                         class="btn btn-success w-100">Login</button>
